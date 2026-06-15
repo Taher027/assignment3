@@ -131,7 +131,7 @@ VALUES
 SELECT
   match_id,
   fixture,
-  base_ticket_price
+  base_ticket_price::INT
 FROM
   matches
 WHERE
@@ -155,7 +155,7 @@ WHERE payment_status IS NULL;
 
 -- Query 4: Retrieve match booking details along with the User's full name and the scheduled Match fixture teams.
 
-SELECT booking_id, full_name, fixture, total_cost from users 
+SELECT booking_id, full_name, fixture, total_cost::INT from users 
 join bookings on bookings.user_id = users.user_id
 join matches on matches.match_id =  bookings.match_id;
 
@@ -166,10 +166,10 @@ left join bookings on users.user_id = bookings.user_id;
 
 -- Query 6: Find all ticket bookings where the total cost is strictly higher than the average cost of all ticket bookings.
 
-SELECT booking_id, match_id, total_cost FROM bookings
+SELECT booking_id, match_id, total_cost::INT FROM bookings
 
 WHERE total_cost > (SELECT AVG(total_cost) from bookings);
 
 -- Query 7: Retrieve the top 2 most expensive matches sorted by base ticket price, skipping the absolute highest premium match.
-SELECT match_id, fixture, base_ticket_price from matches
+SELECT match_id, fixture, base_ticket_price::INT from matches
 ORDER BY base_ticket_price DESC OFFSET 1 LIMIT 2;
