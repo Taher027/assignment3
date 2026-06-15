@@ -159,5 +159,8 @@ SELECT booking_id, full_name, fixture, total_cost from users
 join bookings on bookings.user_id = users.user_id
 join matches on matches.match_id =  bookings.match_id;
 
+-- 5: Display a comprehensive list of all users and their booking IDs, ensuring that fans who have never bought a ticket are still listed.
 
+SELECT users.user_id, users.full_name, bookings.booking_id from users
+left join bookings on users.user_id = bookings.user_id; 
 
